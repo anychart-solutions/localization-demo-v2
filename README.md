@@ -11,7 +11,7 @@ To run the demo development environment, please, make sure you have installed [G
 * To install git, visit [installation instructions](https://git-scm.com/book/en/v1/Getting-Started-Installing-Git) page.
 
 ## Run the demo
-* Clone this demo from [GitHub](https://github.com/anychart-solutions/localization-demo).
+* Clone this demo from [GitHub](https://github.com/anychart-solutions/localization-demo-v2).
 * Install all dependencies with `npm install` command from the root directory.
 * Compile all with `gulp` command from the root directory.
 * Open `index.html` file.
@@ -25,8 +25,8 @@ To run the demo development environment, please, make sure you have installed [G
 
 ## License
 AnyChart Localization and Date-Time Formatting Utility has two parts:
-- code of the solution sample that allows to use Javascript library (in this case, AnyChart). You can use, edit, modify it, use it with other Javascript libraries without any restrictions. It is released under [Apache 2.0 License](https://github.com/anychart-solutions/localization-demo/blob/master/LICENSE).
+- code of the solution sample that allows to use Javascript library (in this case, AnyChart). You can use, edit, modify it, use it with other Javascript libraries without any restrictions. It is released under [Apache 2.0 License](https://github.com/anychart-solutions/localization-demo-v2/blob/master/LICENSE).
 - AnyChart JavaScript library. It is released under Commercial license. You can test this plugin with the trial version of AnyChart. Our trial version is not limited by time and doesn't contain any feature limitations. Check details [here](https://www.anychart.com/buy/)
 
 If you have any questions regarding licensing - please contact us. <sales@anychart.com>
-[![Analytics](https://ga-beacon.appspot.com/UA-228820-4/Solutions/localization-demo?pixel&useReferer)](https://github.com/igrigorik/ga-beacon)
+[![Analytics](https://ga-beacon.appspot.com/UA-228820-4/Solutions/localization-demo-v2?pixel&useReferer)](https://github.com/igrigorik/ga-beacon)
