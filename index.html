@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <meta name="author" content="anychart.com">
+
+    <title>Localization and Date-Time Formatting AnyChart</title>
+
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Latest compiled and minified CSS Bootstrap Select -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+    <!-- AnyChart UI -->
+    <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.0.1/css/anychart-ui.min.css">
+    <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.0.1/fonts/css/anychart-font.min.css">
+
+    <!-- Prism css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism-coy.min.css">
+
+    <!-- css -->
+    <link rel="stylesheet" href="dist/css/app.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- anychart loader -->
+<div id="loader" class="anychart-loader">
+    <div class="rotating-cover">
+        <div class="rotating-plane">
+            <div class="chart-row">
+                <span class="chart-col green"></span>
+                <span class="chart-col orange"></span>
+                <span class="chart-col red"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -->
+
+<div class="wrapper">
+    <div class="container">
+        <h1>AnyChart Localizations</h1>
+        <ul class="list list-unstyled list-nav" id="navPanel">
+            <li>
+                <select name="" class="select selectpicker show-tick" data-style="btn-md" data-width="auto"
+                        id="chart-type-select" data-select="anychart>"
+                        title="Select Chart">
+                    <option value="anychart" selected>AnyChart</option>
+                    <option value="anystock">AnyStock</option>
+                    <option value="anymap">AnyMap</option>
+                    <option value="anygantt">AnyGantt</option>
+                </select>
+            </li>
+
+            <li>
+                <select class="select selectpicker show-tick" data-width="350" data-style="btn-md"
+                        id="language-select"
+                        name="country" data-size="15" data-live-search="true" title="Select Language">
+                </select>
+            </li>
+
+            <li>
+                <select name="" id="date-time-format-select" class="select selectpicker show-tick" data-style="btn-md"
+                        data-width="auto" data-size="15" title="Date Time Format Pattern">
+                </select>
+            </li>
+
+        </ul>
+        <div class="row">
+            <div class="col-sm-12">
+                <hr class="separate-line"/>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs tabs-left">
+                            <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                            <li><a href="#locale-json" data-toggle="tab">Locale - JSON</a></li>
+                            <li><a href="#locale-array" data-toggle="tab">Locale - Array</a></li>
+                            <li><a href="#full-source" data-toggle="tab">Full source</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-10">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                <div class="tab-pane fade chart" id="anychart-container"></div>
+                                <div class="tab-pane fade chart" id="anymap-container"></div>
+                                <div class="tab-pane fade chart" id="anystock-container"></div>
+                                <div class="tab-pane fade chart" id="anygantt-container"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade display-code" id="locale-json">
+                                <div class="prism-window">
+                                    <pre><code class="language-json"></code></pre>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade display-code" id="locale-array">
+                                <div class="prism-window">
+                                    <pre><code class="language-javascript"></code></pre>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade display-code" id="full-source">
+                                <div class="prism-window">
+                                    <pre class="copytoclipboard"><code class="language-markup"></code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified JavaScript Bootstrap Select -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+<script data-chart="anystock" src="https://cdn.anychart.com/csv-data/dollar-to-euro-rate.js"></script>
+<script data-chart="anymap" src="https://cdn.anychart.com/geodata/1.2.0/custom/world/world.js"></script>
+<script data-chart="anymap" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
+<script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-base.min.js"></script>
+<script data-chart="anygantt" src="https://cdn.anychart.com/releases/8.0.1/js/anychart-data-adapter.min.js"></script>
+<script data-chart="anystock" src="https://cdn.anychart.com/releases/8.0.1/js/anychart-stock.min.js"></script>
+<script data-chart="anygantt" src="https://cdn.anychart.com/releases/8.0.1/js/anychart-gantt.min.js"></script>
+<script data-chart="anymap" src="https://cdn.anychart.com/releases/8.0.1/js/anychart-map.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-exports.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
+<script src="dist/js/plugins/prism/prism.min.js"></script>
+<script src="dist/js/common.js"></script>
+</body>
+</html>

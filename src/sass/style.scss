@@ -1,0 +1,121 @@
+@import "modules/loader";
+@import "modules/vertical-tabs";
+
+.wrapper {
+  padding: 10px 25px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.select .btn {
+  border-color: #c5c8d1;
+  background: #fff;
+}
+
+.separate-line {
+  margin-top: 0;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+
+#navPanel {
+  font-size: 0;
+  display: table;
+  margin-bottom: 5px;
+
+  &.list-nav {
+    & > li {
+      display: inline-block;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.display-code {
+  white-space: pre;
+  overflow-y: scroll;
+}
+
+.prism-window pre {
+  margin-top: -75px;
+  //margin-bottom: -95px;
+  border-left: 1px solid #cccccc !important;
+  box-shadow: none !important;
+  overflow-y: scroll;
+  height: 650px;
+}
+
+.tab-content .chart {
+  height: 0;
+}
+
+.tab-content .chart.active {
+  height: 650px;
+}
+
+.tab-content > .tab-pane {
+  overflow: hidden;
+}
+
+.copytoclipboard::after {
+  position: absolute;
+  font-size: 12px;
+  content: 'Copy';
+  left: 12px;
+  top: 8px;
+}
+
+.copytoclipboard.copied::after {
+  content: 'Copied';
+  left: 6px;
+}
+
+.tabs-left > li:first-child a {
+  border-top: 1px solid #fff;
+}
+
+.tabs-left > li:first-child.active a {
+  border-top: 1px solid #ddd;
+}
+
+.tabs-left.nav-tabs > li > a:hover {
+  border-color: transparent;
+}
+
+.tabs-left.nav-tabs > li.active > a:hover {
+  border-color: #ddd;
+  border-right-color: transparent;
+}
+
+@media screen and (max-width: 767px) {
+  .tabs-left {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+
+  .tabs-left.nav-tabs > li > a {
+    border-radius: 0;
+    border: none;
+  }
+
+  .tabs-left.nav-tabs > li.active > a {
+    border-radius: 0;
+    border: none;
+    background: #eee;
+    &:hover {
+      border: none;
+    }
+  }
+
+  .bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark {
+    display: none;
+  }
+
+  .bootstrap-select.btn-group .dropdown-menu {
+    max-width: 100%;
+  }
+}
