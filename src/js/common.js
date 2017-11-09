@@ -180,6 +180,7 @@
                     .replace(/function create(.*)\)\s*\{/, '')
                     .replace(/charts\[\'any.*;\n*/, '')
                     .replace(/}$/, '')
+                    .replace(/\(container\)/, "('container')")
                     .trim();
                 var code = 'anychart.onDocumentReady(function () {' +
                     '\n\n\t\tvar format ="' + format + '";\n' +
