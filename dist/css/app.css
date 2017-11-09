@@ -245,7 +245,8 @@ h1 {
   height: 650px; }
 
 .tab-content > .tab-pane {
-  overflow: hidden; }
+  overflow: hidden;
+  height: 660px; }
 
 .copytoclipboard::after {
   position: absolute;
