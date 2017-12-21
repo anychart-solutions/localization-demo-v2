@@ -29,11 +29,11 @@
 
     function getLocaleText() {
         $.ajax({
-            url: 'https://cdn.anychart.com/releases/8.0.1/index.json',
+            url: 'https://cdn.anychart.com/releases/v8/index.json',
             success: function (res) {
                 var locales = res.locales;
 
-                var localeUrl = 'https://cdn.anychart.com/releases/8.0.1/locales/';
+                var localeUrl = 'https://cdn.anychart.com/releases/v8/locales/';
                 var locale;
                 var localeArray = [];
 
@@ -191,13 +191,13 @@
                     codeFunc + '\n\t\t});';
                 var doc = '<!DOCTYPE html>\n<html lang="en">\n<head>' +
                     '\n\t<meta charset="utf-8" />' +
-                    '\n\t<link rel="stylesheet" href="https://cdn.anychart.com/releases/8.0.1/css/anychart-ui.min.css">' +
-                    '\n\t<link rel="stylesheet" href="https://cdn.anychart.com/releases/8.0.1/fonts/css/anychart-font.min.css">' +
-                    '\n\t<script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-base.min.js"></script>' +
+                    '\n\t<link rel="stylesheet" href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css">' +
+                    '\n\t<link rel="stylesheet" href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css">' +
+                    '\n\t<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>' +
                     additionalScripts +
-                    '\n\t<script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-exports.min.js"></script>' +
-                    '\n\t<script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-ui.min.js"></script>' +
-                    '\n\t<script src="' + 'https://cdn.anychart.com/releases/8.0.1/locales/' + localeCode + '.js"></script>' +
+                    '\n\t<script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>' +
+                    '\n\t<script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>' +
+                    '\n\t<script src="' + 'https://cdn.anychart.com/releases/v8/locales/' + localeCode + '.js"></script>' +
                     '\n</head>\n<body>' +
                     '\n\t<div id="container" style="width: 850px; height: 600px; margin: 0 auto;"></div>' +
                     '\n\t<script>\n\t\t' + code +
@@ -620,7 +620,7 @@
 
         // creates Map Chart
         var chart = anychart.map();
-        // sets geodata using http://cdn.anychart.com/geodata/world/world.js
+        // sets geodata using https://cdn.anychart.com/releases/v8/geodata/custom/world/world.js
         chart.geoData(anychart.maps.world);
 
         chart.padding().top(10);
