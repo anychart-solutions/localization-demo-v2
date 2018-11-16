@@ -29,7 +29,7 @@
 
     function getLocaleText() {
         $.ajax({
-            url: 'https://cdn.anychart.com/releases/v8/index.json',
+            url: 'https://cdn.anychart.com/releases/v8/resorces.json',
             success: function (res) {
                 var locales = res.locales;
 
