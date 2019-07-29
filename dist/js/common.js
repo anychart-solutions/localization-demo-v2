@@ -1,4 +1,4 @@
-(function () {
+(function() {
     var DEFAULT_FORMAT = 'EEEE, dd MMMM yyyy';
     var timeZoneOffset = new Date().getTimezoneOffset();
     var $languageSelect = $('#language-select');
@@ -18,19 +18,19 @@
 
     formats = {};
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#' + chartContainer).addClass('in active');
         getLocaleText();
     });
 
-    $(window).on('load', function () {
+    $(window).on('load', function() {
         hidePreloader();
     });
 
     function getLocaleText() {
         $.ajax({
             url: 'https://cdn.anychart.com/releases/v8/resources.json',
-            success: function (res) {
+            success: function(res) {
                 var locales = res.locales;
 
                 var localeUrl = 'https://cdn.anychart.com/releases/v8/locales/';
@@ -47,7 +47,7 @@
                     }
                 }
 
-                localeArray.sort(function (a, b) {
+                localeArray.sort(function(a, b) {
                     return a['eng-name'].localeCompare(b['eng-name']);
                 });
 
@@ -67,7 +67,7 @@
         });
     }
 
-    $languageSelect.on('change', function () {
+    $languageSelect.on('change', function() {
         var url = $(this).find('option:selected').data().localeSrc;
         var code = $(this).find('option:selected').val();
 
@@ -76,7 +76,7 @@
         loadScript(url, changeLocale, code);
     });
 
-    $chartTypeSelect.on('change', function () {
+    $chartTypeSelect.on('change', function() {
         $('.chart').removeClass('in active');
         $('#' + $(this).val() + '-container').addClass('in active');
         createChartInit = null;
@@ -84,7 +84,7 @@
         displayFullSource();
     });
 
-    $localeFormatSelect.on('change', function () {
+    $localeFormatSelect.on('change', function() {
         localeFormat = $localeFormatSelect.val();
         changeDatePattern();
     });
@@ -124,7 +124,7 @@
 
         var result = script.onload = callback(code);
 
-        var timer = setInterval(function () {
+        var timer = setInterval(function() {
             if (result) {
                 clearInterval(timer);
                 displayLocaleJSON(url);
@@ -137,12 +137,14 @@
     function displayLocaleJSON(url) {
         $.ajax({
             url: url,
-            success: function (source) {
-                var code = JSON.stringify(eval(source), null, '\t');
-                var $lang = $('#locale-json').find('.language-json');
+            success: function(source) {
+                setTimeout(() => {
+                    var code = JSON.stringify(anychart.format.locales[localeCode], null, '\t');
+                    var $lang = $('#locale-json').find('.language-json');
 
-                $lang.text(code);
-                Prism.highlightElement($lang[0]);
+                    $lang.text(code);
+                    Prism.highlightElement($lang[0]);
+                }, 0);
             }
         });
     }
@@ -150,7 +152,7 @@
     function displayFormatArray(code) {
         var $lang = $('#locale-array').find('.language-javascript');
         var text = 'var formats = {};\n' + 'formats' + '[\'' + code + '\'] = ';
-        var formatsText = formats[code].map(function (value, index) {
+        var formatsText = formats[code].map(function(value, index) {
             if (index == 0) {
                 return '"' + value + '"'
             }
@@ -161,12 +163,12 @@
     }
 
     function displayFullSource() {
-        var timer = setTimeout(function () {
+        var timer = setTimeout(function() {
             if (typeof createChartInit === 'function') {
                 clearTimeout(timer);
 
                 var additionalScripts = [''];
-                $('[data-chart="' + $chartTypeSelect.val() + '"]').map(function (index, item) {
+                $('[data-chart="' + $chartTypeSelect.val() + '"]').map(function(index, item) {
                     additionalScripts.push(item.outerHTML.replace(/ data-chart="[A-z]*"/, ''));
                 });
 
@@ -275,7 +277,7 @@
     }
 
     /* Prism copy to clipbaord */
-    $('pre.copytoclipboard').each(function () {
+    $('pre.copytoclipboard').each(function() {
         $this = $(this);
         $button = $('<button></button>');
         $this.wrap('<div/>').removeClass('copytoclipboard');
@@ -290,20 +292,20 @@
         }).appendTo($wrapper).addClass('copytoclipboard btn btn-default');
 
         var copyCode = new Clipboard('button.copytoclipboard', {
-            target: function (trigger) {
+            target: function(trigger) {
                 return trigger.previousElementSibling;
             }
         });
-        copyCode.on('success', function (event) {
+        copyCode.on('success', function(event) {
             event.clearSelection();
             $(event.trigger).addClass('copied');
-            window.setTimeout(function () {
+            window.setTimeout(function() {
                 $(event.trigger).removeClass('copied');
             }, 2000);
         });
-        copyCode.on('error', function (event) {
+        copyCode.on('error', function(event) {
             event.trigger.textContent = 'Press "Ctrl + C" to copy';
-            window.setTimeout(function () {
+            window.setTimeout(function() {
                 event.trigger.textContent = 'Copy';
             }, 2000);
         });
@@ -361,7 +363,7 @@
          *  @param series - stroke color
          *  @param name - stroke series name
          */
-        var seriesConfiguration = function (series, name) {
+        var seriesConfiguration = function(series, name) {
             series.name(name);
             series.hovered().markers()
                 .enabled(true)
@@ -389,10 +391,10 @@
         // turn the legend on
         chart.legend().enabled(true).padding([0, 0, 10, 0]);
 
-        chart.xAxis().labels().format(function () {
+        chart.xAxis().labels().format(function() {
             return anychart.format.dateTime(this.value, 'MMM', timeZoneOffset, locale);
         });
-        chart.tooltip().titleFormat(function () {
+        chart.tooltip().titleFormat(function() {
             return anychart.format.dateTime(this.points[0].x, format, timeZoneOffset, locale);
         });
 
@@ -454,7 +456,7 @@
     function createAnygantt(container, locale, format) {
         // The data used in this sample can be obtained from the CDN
         // https://cdn.anychart.com/samples-data/gantt-charts/server-status-list/data.json
-        anychart.data.loadJsonFile('https://cdn.anychart.com/samples-data/gantt-charts/server-status-list/data.json', function (data) {
+        anychart.data.loadJsonFile('https://cdn.anychart.com/samples-data/gantt-charts/server-status-list/data.json', function(data) {
             // create data tree on our data
             var treeData = anychart.data.tree(data, 'as-table');
 
@@ -484,7 +486,7 @@
             firstColumn.title('Server')
                 .width(140)
                 .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                .format(function (item) {
+                .format(function(item) {
                     return item.get('name');
                 });
 
@@ -494,7 +496,7 @@
             secondColumn.title('Online')
                 .width(60)
                 .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                .format(function (item) {
+                .format(function(item) {
                     return item.get('online') || '';
                 });
 
@@ -504,7 +506,7 @@
             thirdColumn.title('Maintenance')
                 .width(60)
                 .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                .format(function (item) {
+                .format(function(item) {
                     return item.get('maintenance') || '';
                 });
 
@@ -514,7 +516,7 @@
             fourthColumn.title('Offline')
                 .width(60)
                 .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                .format(function (item) {
+                .format(function(item) {
                     return item.get('offline') || '';
                 });
 
@@ -607,7 +609,7 @@
             {id: 'VN', name: 'Vietnam', size: 6.8, date: '24 June 1983', description: 'Tuan Giao earthquake'}
         ];
 
-        data.sort(function (a, b) {
+        data.sort(function(a, b) {
             return new Date(a['date']).getTime() - new Date(b['date']).getTime();
         });
 
@@ -663,7 +665,7 @@
         series.tooltip().useHtml(true);
         series.tooltip().title().fontColor('#7c868e');
 
-        series.tooltip().format(function () {
+        series.tooltip().format(function() {
             var span_for_value = '<span style="color: #545f69; font-size: 12px; font-weight: bold">';
             var span_for_date = '<br/><span style="color: #7c868e; font-size: 11px">';
             var span_for_description = '<br/><span style="color: #7c868e; font-size: 12px; font-style: italic">"';
