@@ -1,4 +1,4 @@
-(function() {
+(function () {
     var DEFAULT_FORMAT = 'EEEE, dd MMMM yyyy';
     var timeZoneOffset = new Date().getTimezoneOffset();
     var $languageSelect = $('#language-select');
@@ -18,19 +18,19 @@
 
     formats = {};
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#' + chartContainer).addClass('in active');
         getLocaleText();
     });
 
-    $(window).on('load', function() {
+    $(window).on('load', function () {
         hidePreloader();
     });
 
     function getLocaleText() {
         $.ajax({
             url: 'https://cdn.anychart.com/releases/v8/resources.json',
-            success: function(res) {
+            success: function (res) {
                 var locales = res.locales;
 
                 var localeUrl = 'https://cdn.anychart.com/releases/v8/locales/';
@@ -47,7 +47,7 @@
                     }
                 }
 
-                localeArray.sort(function(a, b) {
+                localeArray.sort(function (a, b) {
                     return a['eng-name'].localeCompare(b['eng-name']);
                 });
 
@@ -67,7 +67,7 @@
         });
     }
 
-    $languageSelect.on('change', function() {
+    $languageSelect.on('change', function () {
         var url = $(this).find('option:selected').data().localeSrc;
         var code = $(this).find('option:selected').val();
 
@@ -76,7 +76,7 @@
         loadScript(url, changeLocale, code);
     });
 
-    $chartTypeSelect.on('change', function() {
+    $chartTypeSelect.on('change', function () {
         $('.chart').removeClass('in active');
         $('#' + $(this).val() + '-container').addClass('in active');
         createChartInit = null;
@@ -84,7 +84,7 @@
         displayFullSource();
     });
 
-    $localeFormatSelect.on('change', function() {
+    $localeFormatSelect.on('change', function () {
         localeFormat = $localeFormatSelect.val();
         changeDatePattern();
     });
@@ -124,7 +124,7 @@
 
         var result = script.onload = callback(code);
 
-        var timer = setInterval(function() {
+        var timer = setInterval(function () {
             if (result) {
                 clearInterval(timer);
                 displayLocaleJSON(url);
@@ -137,14 +137,12 @@
     function displayLocaleJSON(url) {
         $.ajax({
             url: url,
-            success: function(source) {
-                setTimeout(() => {
-                    var code = JSON.stringify(anychart.format.locales[localeCode], null, '\t');
-                    var $lang = $('#locale-json').find('.language-json');
+            success: function (source) {
+                var code = JSON.stringify(eval(source), null, '\t');
+                var $lang = $('#locale-json').find('.language-json');
 
-                    $lang.text(code);
-                    Prism.highlightElement($lang[0]);
-                }, 0);
+                $lang.text(code);
+                Prism.highlightElement($lang[0]);
             }
         });
     }
@@ -152,7 +150,7 @@
     function displayFormatArray(code) {
         var $lang = $('#locale-array').find('.language-javascript');
         var text = 'var formats = {};\n' + 'formats' + '[\'' + code + '\'] = ';
-        var formatsText = formats[code].map(function(value, index) {
+        var formatsText = formats[code].map(function (value, index) {
             if (index == 0) {
                 return '"' + value + '"'
             }
@@ -163,12 +161,12 @@
     }
 
     function displayFullSource() {
-        var timer = setTimeout(function() {
+        var timer = setTimeout(function () {
             if (typeof createChartInit === 'function') {
                 clearTimeout(timer);
 
                 var additionalScripts = [''];
-                $('[data-chart="' + $chartTypeSelect.val() + '"]').map(function(index, item) {
+                $('[data-chart="' + $chartTypeSelect.val() + '"]').map(function (index, item) {
                     additionalScripts.push(item.outerHTML.replace(/ data-chart="[A-z]*"/, ''));
                 });
 
@@ -277,12 +275,12 @@
     }
 
     /* Prism copy to clipbaord */
-    $('pre.copytoclipboard').each(function() {
+    $('pre.copytoclipboard').each(function () {
         $this = $(this);
         $button = $('<button></button>');
         $this.wrap('<div/>').removeClass('copytoclipboard');
         $wrapper = $this.parent();
-        $wrapper.addClass('copytoclipboard-wrapper').css({position: 'relative'});
+        $wrapper.addClass('copytoclipboard-wrapper').css({ position: 'relative' });
         $button.css({
             position: 'absolute',
             top: 10,
@@ -292,20 +290,20 @@
         }).appendTo($wrapper).addClass('copytoclipboard btn btn-default');
 
         var copyCode = new Clipboard('button.copytoclipboard', {
-            target: function(trigger) {
+            target: function (trigger) {
                 return trigger.previousElementSibling;
             }
         });
-        copyCode.on('success', function(event) {
+        copyCode.on('success', function (event) {
             event.clearSelection();
             $(event.trigger).addClass('copied');
-            window.setTimeout(function() {
+            window.setTimeout(function () {
                 $(event.trigger).removeClass('copied');
             }, 2000);
         });
-        copyCode.on('error', function(event) {
+        copyCode.on('error', function (event) {
             event.trigger.textContent = 'Press "Ctrl + C" to copy';
-            window.setTimeout(function() {
+            window.setTimeout(function () {
                 event.trigger.textContent = 'Copy';
             }, 2000);
         });
@@ -335,13 +333,13 @@
         var dataSet = anychart.data.set(data);
 
         // map data for the first series,take value from first column of data set
-        var seriesData_1 = dataSet.mapAs({'x': 0, 'value': 1});
+        var seriesData_1 = dataSet.mapAs({ 'x': 0, 'value': 1 });
 
         // map data for the second series,take value from second column of data set
-        var seriesData_2 = dataSet.mapAs({'x': 0, 'value': 2});
+        var seriesData_2 = dataSet.mapAs({ 'x': 0, 'value': 2 });
 
         // map data for the third series, take x from the zero column and value from the third column of data set
-        var seriesData_3 = dataSet.mapAs({'x': 0, 'value': 3});
+        var seriesData_3 = dataSet.mapAs({ 'x': 0, 'value': 3 });
 
         // create line chart
         var chart = anychart.line();
@@ -363,7 +361,7 @@
          *  @param series - stroke color
          *  @param name - stroke series name
          */
-        var seriesConfiguration = function(series, name) {
+        var seriesConfiguration = function (series, name) {
             series.name(name);
             series.hovered().markers()
                 .enabled(true)
@@ -391,10 +389,10 @@
         // turn the legend on
         chart.legend().enabled(true).padding([0, 0, 10, 0]);
 
-        chart.xAxis().labels().format(function() {
+        chart.xAxis().labels().format(function () {
             return anychart.format.dateTime(this.value, 'MMM', timeZoneOffset, locale);
         });
-        chart.tooltip().titleFormat(function() {
+        chart.tooltip().titleFormat(function () {
             return anychart.format.dateTime(this.points[0].x, format, timeZoneOffset, locale);
         });
 
@@ -417,7 +415,7 @@
             ' - ' + anychart.format.dateTime(data[data.length - 1][0], format, timeZoneOffset, locale);
 
         // map loaded data
-        var mapping = dataTable.mapAs({'value': 1});
+        var mapping = dataTable.mapAs({ 'value': 1 });
 
         // create stock chart
         var chart = anychart.stock();
@@ -456,7 +454,7 @@
     function createAnygantt(container, locale, format) {
         // The data used in this sample can be obtained from the CDN
         // https://cdn.anychart.com/samples-data/gantt-charts/server-status-list/data.json
-        anychart.data.loadJsonFile('https://cdn.anychart.com/samples-data/gantt-charts/server-status-list/data.json', function(data) {
+        anychart.data.loadJsonFile('https://cdn.anychart.com/samples-data/gantt-charts/server-status-list/data.json', function (data) {
             // create data tree on our data
             var treeData = anychart.data.tree(data, 'as-table');
 
@@ -482,41 +480,41 @@
 
             // set first column settings
             var firstColumn = dataGrid.column(1);
-            firstColumn.cellTextSettings().hAlign('left');
+            firstColumn.labels().hAlign('left');
             firstColumn.title('Server')
                 .width(140)
-                .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                .format(function(item) {
+                .labelsOverrider(labelTextSettingsOverrider)
+                .setColumnFormat(function (item) {
                     return item.get('name');
                 });
 
             // set first column settings
             var secondColumn = dataGrid.column(2);
-            secondColumn.cellTextSettings().hAlign('right');
+            secondColumn.labels().hAlign('right');
             secondColumn.title('Online')
                 .width(60)
-                .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                .format(function(item) {
+                .labelsOverrider(labelTextSettingsOverrider)
+                .setColumnFormat(function (item) {
                     return item.get('online') || '';
                 });
 
             // set first column settings
             var thirdColumn = dataGrid.column(3);
-            thirdColumn.cellTextSettings().hAlign('right');
+            thirdColumn.labels().hAlign('right');
             thirdColumn.title('Maintenance')
                 .width(60)
-                .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                .format(function(item) {
+                .labelsOverrider(labelTextSettingsOverrider)
+                .setColumnFormat(function (item) {
                     return item.get('maintenance') || '';
                 });
 
             // set first column settings
             var fourthColumn = dataGrid.column(4);
-            fourthColumn.cellTextSettings().hAlign('right');
+            fourthColumn.labels().hAlign('right');
             fourthColumn.title('Offline')
                 .width(60)
-                .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                .format(function(item) {
+                .labelsOverrider(labelTextSettingsOverrider)
+                .setColumnFormat(function (item) {
                     return item.get('offline') || '';
                 });
 
@@ -546,70 +544,70 @@
 
     function createAnymap(container, locale, format) {
         var data = [
-            {id: 'AF', name: 'Afghanistan', size: 7.5, date: '26 October 2015', description: 'Hindu Kush earthquake'},
-            {id: 'DZ', name: 'Algeria', size: 7.7, date: '10 October 1980', description: 'El Asnam earthquake'},
-            {id: 'AR', name: 'Argentina', size: 8.0, date: '27 October 1894', description: 'San Juan earthquake'},
-            {id: 'AU', name: 'Australia', size: 7.2, date: '29 April 1941', description: ''},
-            {id: 'BD', name: 'Bangladesh', size: 8.8, date: '2 April 1762', description: 'Arakan earthquake'},
-            {id: 'BE', name: 'Belgium', size: 6.3, date: '18 September 1692', description: ''},
-            {id: 'BO', name: 'Bolivia', size: 8.5, date: '9 May 1877', description: 'Iquique earthquake'},
-            {id: 'BR', name: 'Brazil', size: 6.2, date: '31 January 1955', description: ''},
-            {id: 'BG', name: 'Bulgaria', size: 7.8, date: '4 April 1904', description: ''},
-            {id: 'CA', name: 'Canada', size: 8.9, date: '26 January 1700', description: 'Cascadia earthquake'},
-            {id: 'CN', name: 'China', size: 8.6, date: '15 August 1950', description: 'Assam–Tibet earthquake'},
-            {id: 'CL', name: 'Chile', size: 9.5, date: '22 May 1960', description: 'Valdivia earthquake'},
-            {id: 'CO', name: 'Colombia', size: 8.8, date: '31 January 1906', description: 'Ecuador–Colombia earthquake'},
-            {id: 'CU', name: 'Cuba', size: 6.8, date: '11 June 1766', description: ''},
-            {id: 'DK', name: 'Denmark', size: 4.3, date: '16 December 2008', description: ''},
-            {id: 'DO', name: 'Dominican Republic', size: 8.1, date: '4 August 1946', description: 'Dominican Republic earthquake'},
-            {id: 'EC', name: 'Ecuador', size: 8.8, date: '31 January 1906', description: 'Ecuador–Colombia earthquake'},
-            {id: 'EG', name: 'Egypt', size: 7.3, date: '22 November 1995', description: 'Gulf of Aqaba earthquake'},
-            {id: 'EE', name: 'Estonia', size: 4.5, date: '25 October 1976', description: ''},
-            {id: 'FI', name: 'Finland', size: 3.5, date: '21 February 1989', description: ''},
-            {id: 'FR', name: 'France', size: 6.2, date: '11 June 1909', description: 'Provence earthquake'},
-            {id: 'DE', name: 'Germany', size: 6.1, date: '18 February 1756', description: ''},
-            {id: 'GR', name: 'Greece', size: 8.5, date: '21 July 365', description: 'Crete earthquake'},
-            {id: 'GT', name: 'Guatemala', size: 7.7, date: '6 August 1942', description: 'Guatemala earthquake'},
-            {id: 'HT', name: 'Haiti', size: 8.1, date: '7 May 1842', description: 'Cap-Haitien earthquake'},
-            {id: 'IS', name: 'Iceland', size: 6.6, date: '17 June 2000', description: 'Iceland earthquakes'},
-            {id: 'IN', name: 'India', size: 8.6, date: '15 August 1950', description: 'Assam–Tibet earthquake'},
-            {id: 'ID', name: 'Indonesia', size: 9.2, date: '26 December 2004', description: 'Boxing Day earthquake'},
-            {id: 'IR', name: 'Iran', size: 7.9, date: '22 December 856', description: 'Damghan earthquake'},
-            {id: 'IT', name: 'Italy', size: 7.4, date: '11 January 1693', description: 'Sicily earthquake'},
-            {id: 'JP', name: 'Japan', size: 9.0, date: '11 March 2011', description: 'Tōhoku earthquake'},
-            {id: 'LB', name: 'Lebanon', size: 7.5, date: '9 July 551', description: 'Beirut earthquake'},
-            {id: 'MY', name: 'Malaysia', size: 6.0, date: '5 June 2015', description: 'Sabah earthquake'},
-            {id: 'MX', name: 'Mexico', size: 8.6, date: '28 March 1787', description: 'Mexico earthquake'},
-            {id: 'MN', name: 'Mongolia', size: 8.4, date: '23 July 1905', description: 'Bolnai earthquake'},
-            {id: 'ME', name: 'Montenegro', size: 7, date: '15 April 1979', description: 'Montenegro earthquake'},
-            {id: 'NP', name: 'Nepal', size: 8, date: '15 January 1934	', description: 'Nepal–Bihar earthquake'},
-            {id: 'NL', name: 'Netherlands', size: 5.3, date: '13 April 1992', description: 'Roermond earthquake'},
-            {id: 'NZ', name: 'New Zealand', size: 8.3, date: '23 January 1855', description: 'Wairarapa earthquake'},
-            {id: 'NI', name: 'Nicaragua', size: 7.7, date: '2 September 1992', description: 'Nicaragua earthquake'},
-            {id: 'KP', name: 'North Korea', size: 6.5, date: '19 March 1952', description: ''},
-            {id: 'NO', name: 'Norway', size: 6.2, date: '19 February 2004', description: 'Svalbard earthquake'},
-            {id: 'PK', name: 'Pakistan', size: 8.1, date: '28 November 1945', description: 'Balochistan earthquake'},
-            {id: 'PE', name: 'Peru', size: 8.6, date: '28 October 1746', description: 'Lima–Callao earthquake'},
-            {id: 'PH', name: 'Philippines', size: 8.3, date: '15 August 1918', description: 'Celebes Sea earthquake'},
-            {id: 'PL', name: 'Poland', size: 5.4, date: '31 December 1999', description: ''},
-            {id: 'PT', name: 'Portugal', size: 8.7, date: '1 November 1755', description: '1755 Lisbon earthquake'},
-            {id: 'RO', name: 'Romania', size: 7.9, date: '26 October 1802', description: 'Vrancea earthquake'},
-            {id: 'RU', name: 'Russia', size: 9.0, date: '4 November 1952', description: 'Kamchatka earthquake'},
-            {id: 'WS', name: 'Samoa', size: 8.5, date: '26 June 1917', description: 'Samoa earthquake'},
-            {id: 'ZA', name: 'South Africa', size: 6.3, date: '29 September 1969', description: ''},
-            {id: 'ES', name: 'Spain', size: 7.0, date: '21 March 1954', description: ''},
-            {id: 'SE', name: 'Sweden', size: 4.7, date: '15 September 2014', description: ''},
-            {id: 'CH', name: 'Switzerland', size: 6.5, date: '18 October 1356', description: 'Basel earthquake'},
-            {id: 'TW', name: 'Taiwan', size: 7.6, date: '21 September 1999', description: '921 earthquake'},
-            {id: 'TH', name: 'Thailand', size: 6.3, date: '5 May 2014', description: 'Mae Lao earthquake'},
-            {id: 'TR', name: 'Turkey', size: 7.8, date: '27 December 1939', description: 'Erzincan earthquake'},
-            {id: 'GB', name: 'United Kingdom', size: 6.1, date: '7 June 1931', description: 'Dogger Bank earthquake'},
-            {id: 'US', name: 'United States', size: 9.2, date: '27 March 1964', description: 'Alaska earthquake'},
-            {id: 'VE', name: 'Venezuela', size: 7.5, date: '26 March 1812', description: 'Caracas earthquake'},
-            {id: 'VN', name: 'Vietnam', size: 6.8, date: '24 June 1983', description: 'Tuan Giao earthquake'}
+            { id: 'AF', name: 'Afghanistan', size: 7.5, date: '26 October 2015', description: 'Hindu Kush earthquake' },
+            { id: 'DZ', name: 'Algeria', size: 7.7, date: '10 October 1980', description: 'El Asnam earthquake' },
+            { id: 'AR', name: 'Argentina', size: 8.0, date: '27 October 1894', description: 'San Juan earthquake' },
+            { id: 'AU', name: 'Australia', size: 7.2, date: '29 April 1941', description: '' },
+            { id: 'BD', name: 'Bangladesh', size: 8.8, date: '2 April 1762', description: 'Arakan earthquake' },
+            { id: 'BE', name: 'Belgium', size: 6.3, date: '18 September 1692', description: '' },
+            { id: 'BO', name: 'Bolivia', size: 8.5, date: '9 May 1877', description: 'Iquique earthquake' },
+            { id: 'BR', name: 'Brazil', size: 6.2, date: '31 January 1955', description: '' },
+            { id: 'BG', name: 'Bulgaria', size: 7.8, date: '4 April 1904', description: '' },
+            { id: 'CA', name: 'Canada', size: 8.9, date: '26 January 1700', description: 'Cascadia earthquake' },
+            { id: 'CN', name: 'China', size: 8.6, date: '15 August 1950', description: 'Assam–Tibet earthquake' },
+            { id: 'CL', name: 'Chile', size: 9.5, date: '22 May 1960', description: 'Valdivia earthquake' },
+            { id: 'CO', name: 'Colombia', size: 8.8, date: '31 January 1906', description: 'Ecuador–Colombia earthquake' },
+            { id: 'CU', name: 'Cuba', size: 6.8, date: '11 June 1766', description: '' },
+            { id: 'DK', name: 'Denmark', size: 4.3, date: '16 December 2008', description: '' },
+            { id: 'DO', name: 'Dominican Republic', size: 8.1, date: '4 August 1946', description: 'Dominican Republic earthquake' },
+            { id: 'EC', name: 'Ecuador', size: 8.8, date: '31 January 1906', description: 'Ecuador–Colombia earthquake' },
+            { id: 'EG', name: 'Egypt', size: 7.3, date: '22 November 1995', description: 'Gulf of Aqaba earthquake' },
+            { id: 'EE', name: 'Estonia', size: 4.5, date: '25 October 1976', description: '' },
+            { id: 'FI', name: 'Finland', size: 3.5, date: '21 February 1989', description: '' },
+            { id: 'FR', name: 'France', size: 6.2, date: '11 June 1909', description: 'Provence earthquake' },
+            { id: 'DE', name: 'Germany', size: 6.1, date: '18 February 1756', description: '' },
+            { id: 'GR', name: 'Greece', size: 8.5, date: '21 July 365', description: 'Crete earthquake' },
+            { id: 'GT', name: 'Guatemala', size: 7.7, date: '6 August 1942', description: 'Guatemala earthquake' },
+            { id: 'HT', name: 'Haiti', size: 8.1, date: '7 May 1842', description: 'Cap-Haitien earthquake' },
+            { id: 'IS', name: 'Iceland', size: 6.6, date: '17 June 2000', description: 'Iceland earthquakes' },
+            { id: 'IN', name: 'India', size: 8.6, date: '15 August 1950', description: 'Assam–Tibet earthquake' },
+            { id: 'ID', name: 'Indonesia', size: 9.2, date: '26 December 2004', description: 'Boxing Day earthquake' },
+            { id: 'IR', name: 'Iran', size: 7.9, date: '22 December 856', description: 'Damghan earthquake' },
+            { id: 'IT', name: 'Italy', size: 7.4, date: '11 January 1693', description: 'Sicily earthquake' },
+            { id: 'JP', name: 'Japan', size: 9.0, date: '11 March 2011', description: 'Tōhoku earthquake' },
+            { id: 'LB', name: 'Lebanon', size: 7.5, date: '9 July 551', description: 'Beirut earthquake' },
+            { id: 'MY', name: 'Malaysia', size: 6.0, date: '5 June 2015', description: 'Sabah earthquake' },
+            { id: 'MX', name: 'Mexico', size: 8.6, date: '28 March 1787', description: 'Mexico earthquake' },
+            { id: 'MN', name: 'Mongolia', size: 8.4, date: '23 July 1905', description: 'Bolnai earthquake' },
+            { id: 'ME', name: 'Montenegro', size: 7, date: '15 April 1979', description: 'Montenegro earthquake' },
+            { id: 'NP', name: 'Nepal', size: 8, date: '15 January 1934	', description: 'Nepal–Bihar earthquake' },
+            { id: 'NL', name: 'Netherlands', size: 5.3, date: '13 April 1992', description: 'Roermond earthquake' },
+            { id: 'NZ', name: 'New Zealand', size: 8.3, date: '23 January 1855', description: 'Wairarapa earthquake' },
+            { id: 'NI', name: 'Nicaragua', size: 7.7, date: '2 September 1992', description: 'Nicaragua earthquake' },
+            { id: 'KP', name: 'North Korea', size: 6.5, date: '19 March 1952', description: '' },
+            { id: 'NO', name: 'Norway', size: 6.2, date: '19 February 2004', description: 'Svalbard earthquake' },
+            { id: 'PK', name: 'Pakistan', size: 8.1, date: '28 November 1945', description: 'Balochistan earthquake' },
+            { id: 'PE', name: 'Peru', size: 8.6, date: '28 October 1746', description: 'Lima–Callao earthquake' },
+            { id: 'PH', name: 'Philippines', size: 8.3, date: '15 August 1918', description: 'Celebes Sea earthquake' },
+            { id: 'PL', name: 'Poland', size: 5.4, date: '31 December 1999', description: '' },
+            { id: 'PT', name: 'Portugal', size: 8.7, date: '1 November 1755', description: '1755 Lisbon earthquake' },
+            { id: 'RO', name: 'Romania', size: 7.9, date: '26 October 1802', description: 'Vrancea earthquake' },
+            { id: 'RU', name: 'Russia', size: 9.0, date: '4 November 1952', description: 'Kamchatka earthquake' },
+            { id: 'WS', name: 'Samoa', size: 8.5, date: '26 June 1917', description: 'Samoa earthquake' },
+            { id: 'ZA', name: 'South Africa', size: 6.3, date: '29 September 1969', description: '' },
+            { id: 'ES', name: 'Spain', size: 7.0, date: '21 March 1954', description: '' },
+            { id: 'SE', name: 'Sweden', size: 4.7, date: '15 September 2014', description: '' },
+            { id: 'CH', name: 'Switzerland', size: 6.5, date: '18 October 1356', description: 'Basel earthquake' },
+            { id: 'TW', name: 'Taiwan', size: 7.6, date: '21 September 1999', description: '921 earthquake' },
+            { id: 'TH', name: 'Thailand', size: 6.3, date: '5 May 2014', description: 'Mae Lao earthquake' },
+            { id: 'TR', name: 'Turkey', size: 7.8, date: '27 December 1939', description: 'Erzincan earthquake' },
+            { id: 'GB', name: 'United Kingdom', size: 6.1, date: '7 June 1931', description: 'Dogger Bank earthquake' },
+            { id: 'US', name: 'United States', size: 9.2, date: '27 March 1964', description: 'Alaska earthquake' },
+            { id: 'VE', name: 'Venezuela', size: 7.5, date: '26 March 1812', description: 'Caracas earthquake' },
+            { id: 'VN', name: 'Vietnam', size: 6.8, date: '24 June 1983', description: 'Tuan Giao earthquake' }
         ];
 
-        data.sort(function(a, b) {
+        data.sort(function (a, b) {
             return new Date(a['date']).getTime() - new Date(b['date']).getTime();
         });
 
@@ -658,14 +656,14 @@
 
         // sets tooltip
         var tooltipSettings = {
-            background: {fill: 'white', stroke: '#c1c1c1', corners: 3, cornerType: 'ROUND'},
+            background: { fill: 'white', stroke: '#c1c1c1', corners: 3, cornerType: 'ROUND' },
             padding: [8, 13, 10, 13]
         };
         series.tooltip(tooltipSettings);
         series.tooltip().useHtml(true);
         series.tooltip().title().fontColor('#7c868e');
 
-        series.tooltip().format(function() {
+        series.tooltip().format(function () {
             var span_for_value = '<span style="color: #545f69; font-size: 12px; font-weight: bold">';
             var span_for_date = '<br/><span style="color: #7c868e; font-size: 11px">';
             var span_for_description = '<br/><span style="color: #7c868e; font-size: 12px; font-style: italic">"';
