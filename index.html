@@ -18,7 +18,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 	<!-- Latest compiled and minified CSS Bootstrap Select -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
 	<!-- AnyChart UI -->
 	<link rel="stylesheet" href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css">
@@ -53,70 +54,72 @@
 	</div>
 	<!-- -->
 
-	<ul class="list list-unstyled list-nav" id="navPanel">
-		<li>
-			<select name="" class="select selectpicker show-tick" data-style="btn-md" data-width="auto" id="chart-type-select"
-			 data-select="anychart>" title="Select Chart">
-				<option value="anychart" selected>AnyChart</option>
-				<option value="anystock">AnyStock</option>
-				<option value="anymap">AnyMap</option>
-				<option value="anygantt">AnyGantt</option>
-			</select>
-		</li>
+	<div class="container-fluid">
+		<ul class="list list-unstyled list-nav" id="navPanel">
+			<li>
+				<select name="" class="select selectpicker show-tick" data-style="btn-md" data-width="auto"
+					id="chart-type-select" data-select="anychart>" title="Select Chart">
+					<option value="anychart" selected>AnyChart</option>
+					<option value="anystock">AnyStock</option>
+					<option value="anymap">AnyMap</option>
+					<option value="anygantt">AnyGantt</option>
+				</select>
+			</li>
 
-		<li>
-			<select class="select selectpicker show-tick" data-width="350" data-style="btn-md" id="language-select" name="country"
-			 data-size="15" data-live-search="true" title="Select Language">
-			</select>
-		</li>
+			<li>
+				<select class="select selectpicker show-tick" data-width="350" data-style="btn-md" id="language-select"
+					name="country" data-size="15" data-live-search="true" title="Select Language">
+				</select>
+			</li>
 
-		<li>
-			<select name="" id="date-time-format-select" class="select selectpicker show-tick" data-style="btn-md" data-width="auto"
-			 data-size="15" title="Date Time Format Pattern">
-			</select>
-		</li>
+			<li>
+				<select name="" id="date-time-format-select" class="select selectpicker show-tick" data-style="btn-md"
+					data-width="auto" data-size="15" title="Date Time Format Pattern">
+				</select>
+			</li>
 
-	</ul>
-	<div class="row">
-		<div class="col-sm-12">
-			<hr class="separate-line" />
-			<div class="row">
-				<div class="col-sm-2">
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs tabs-left">
-						<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-						<li><a href="#locale-json" data-toggle="tab">Locale - JSON</a></li>
-						<li><a href="#locale-array" data-toggle="tab">Locale - Array</a></li>
-						<li><a href="#full-source" data-toggle="tab">Full source</a></li>
-					</ul>
-				</div>
-				<div class="col-sm-10">
-					<!-- Tab panes -->
-					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane fade in active" id="home">
-							<div class="tab-pane fade chart" id="anychart-container"></div>
-							<div class="tab-pane fade chart" id="anymap-container"></div>
-							<div class="tab-pane fade chart" id="anystock-container"></div>
-							<div class="tab-pane fade chart" id="anygantt-container"></div>
-						</div>
-						<div role="tabpanel" class="tab-pane fade display-code" id="locale-json">
-							<div class="prism-window">
-								<pre><code class="language-json"></code></pre>
+		</ul>
+		<div class="row">
+			<div class="col-sm-12">
+				<hr class="separate-line" />
+				<div class="row">
+					<div class="col-sm-2">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs tabs-left">
+							<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+							<li><a href="#locale-json" data-toggle="tab">Locale - JSON</a></li>
+							<li><a href="#locale-array" data-toggle="tab">Locale - Array</a></li>
+							<li><a href="#full-source" data-toggle="tab">Full source</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-10">
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane fade in active" id="home">
+								<div class="tab-pane fade chart" id="anychart-container"></div>
+								<div class="tab-pane fade chart" id="anymap-container"></div>
+								<div class="tab-pane fade chart" id="anystock-container"></div>
+								<div class="tab-pane fade chart" id="anygantt-container"></div>
 							</div>
-						</div>
-						<div role="tabpanel" class="tab-pane fade display-code" id="locale-array">
-							<div class="prism-window">
-								<pre><code class="language-javascript"></code></pre>
+							<div role="tabpanel" class="tab-pane fade display-code" id="locale-json">
+								<div class="prism-window">
+									<pre><code class="language-json"></code></pre>
+								</div>
 							</div>
-						</div>
-						<div role="tabpanel" class="tab-pane fade display-code" id="full-source">
-							<div class="prism-window">
-								<pre class="copytoclipboard"><code class="language-markup"></code></pre>
+							<div role="tabpanel" class="tab-pane fade display-code" id="locale-array">
+								<div class="prism-window">
+									<pre><code class="language-javascript"></code></pre>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade display-code" id="full-source">
+								<div class="prism-window">
+									<pre class="copytoclipboard"><code class="language-markup"></code></pre>
+								</div>
 							</div>
 						</div>
 					</div>
+					<div class="clearfix"></div>
 				</div>
-				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
